@@ -1,0 +1,36 @@
+
+/* Our first CSS stylesheet */
+
+html {
+    margin: 20px;
+    padding: 0px;
+}
+
+body {
+    background-color: black;
+    color:white;
+}
+
+a:link {
+    font-weight: bold;
+    color:cyan;
+}
+
+a:visited {
+    font-weight: bold;
+    color:fuchsia;
+}
+
+.img-centered {
+    width: 600px; 
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.p-caption {
+    width: 500px; 
+    margin-left: auto; 
+    margin-right: auto;
+    font-size: smaller;
+}
