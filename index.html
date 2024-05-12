@@ -7,23 +7,34 @@
     </head>
     <body>
         <h1>
-            Welcome to the wonderful world of web design!
+            Union Central Data - Fall 2023 Semester
         </h1>
         <!--This is a comment. Below is a paragraph block-->
         <p>
-            This is the index page, named index.html.
-            This is the first page that loads when someone
-            visits yourwebsite.com.
+            Click on elements of the map below to see data from different areas of UC.
             <br><br>
-            HTML (HyperText Markup Language) has come along way since it was first created
-            (HTML 1.0 - 1993). These days, we usually define content
-            in HTML, and define the style/layout of the content in
-            CSS (Cascading Style Sheets).
         </p>
-        <p style="color:red">
-            This block was styled directly in the HTML.
-        </p>
-        <img src="./resources/img/union central map.png" class="img-centered">
+
+        <!-- <img src="./resources/img/union_central_map_cropped.jpeg" class="img-centered"> -->
+
+        <img src="./resources/img/union central map.png" usemap="#image-map">
+
+        <map name="image-map">
+            <area target="" alt="Pool Table 3" title="Pool Table 3" href="pool_tables.html" coords="1048,276,1186,446" shape="rect">
+            <area target="" alt="Pool Table 2" title="Pool Table 2" href="pool_tables.html" coords="1177,626,1007,498" shape="rect">
+            <area target="" alt="Pool Table 1" title="Pool Table 1" href="pool_tables.html" coords="961,687,1134,815" shape="rect">
+            <area target="" alt="Shuffleboard Table" title="Shuffleboard Table" href="other_tables.html" coords="1260,397,1328,646" shape="rect">
+            <area target="" alt="Board Games" title="Board Games" href="board_games.html" coords="526,721,709,877" shape="rect">
+            <area target="" alt="Attendant Desk - Occupancy Data" title="Attendant Desk - Occupancy Data" href="occupancy.html" coords="1167,810,1328,909" shape="rect">
+            <area target="" alt="Air Hockey Table" title="Air Hockey Table" href="other_tables.html" coords="1369,558,1467,692" shape="rect">
+            <area target="" alt="Foosball Table" title="Foosball Table" href="other_tables.html" coords="1360,273,1464,404" shape="rect">
+            <area target="" alt="Union Central" title="Union Central" href="https://www.wm.edu/offices/sue/gamesroom/" coords="745,557,117" shape="circle">
+            <area target="" alt="Wii" title="Wii" href="video_games.html" coords="796,350,50" shape="circle">
+            <area target="" alt="Playstation" title="Playstation" href="video_games.html" coords="824,249,50" shape="circle">
+            <area target="" alt="Xbox" title="Xbox" href="video_games.html" coords="850,156,43" shape="circle">
+        </map>
+
+
         <!--Create links using the 'a' tag-->
         <a href="coin_tossing.html">Next</a>
     </body>
