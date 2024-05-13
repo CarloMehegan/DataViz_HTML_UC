@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Union Central Data</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .column {
+            flex: 1;
+            padding: 10px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Union Central Data - Fall 2023 Semester</h1>
+    <p>
+        Click on elements of the map below to see data from different areas of UC.
+        <br><br>
+    </p>
+
+    <div class="container">
+        <div class="column">
+            <img src="./resources/img/union_central_map_cropped.jpeg" usemap="#image-map-cropped-shrunk" alt="Union Central Map">
+            <map name="image-map-cropped-shrunk">
+                <area target="" alt="Pool Table 3" title="Pool Table 3" href="pool_tables.html" coords="502,221,613,357" shape="rect">
+                <area target="" alt="Pool Table 2" title="Pool Table 2" href="pool_tables.html" coords="606,501,470,398" shape="rect">
+                <area target="" alt="Pool Table 1" title="Pool Table 1" href="pool_tables.html" coords="433,550,571,652" shape="rect">
+                <area target="" alt="Shuffleboard Table" title="Shuffleboard Table" href="other_tables.html" coords="672,318,726,517" shape="rect">
+                <area target="" alt="Board Games" title="Board Games" href="board_games.html" coords="85,577,231,701" shape="rect">
+                <area target="" alt="Attendant Desk - Occupancy Data" title="Attendant Desk - Occupancy Data" href="occupancy.html" coords="598,648,726,727" shape="rect">
+                <area target="" alt="Air Hockey Table" title="Air Hockey Table" href="other_tables.html" coords="759,446,837,554" shape="rect">
+                <area target="" alt="Foosball Table" title="Foosball Table" href="other_tables.html" coords="752,218,835,323" shape="rect">
+                <area target="" alt="Union Central" title="Union Central" href="https://www.wm.edu/offices/sue/gamesroom/" coords="260,446,94" shape="circle">
+                <area target="" alt="Wii" title="Wii" href="video_games.html" coords="301,280,40" shape="circle">
+                <area target="" alt="Playstation" title="Playstation" href="video_games.html" coords="323,199,40" shape="circle">
+                <area target="" alt="Xbox" title="Xbox" href="video_games.html" coords="344,125,34" shape="circle">
+            </map>
+        </div>
+        <div class="column">
+            <img src="./resources/img/another_image.jpeg" usemap="#second-image-map" alt="Another Map">
+            <map name="second-image-map">
+                <!-- Add your second image map areas here -->
+            </map>
+        </div>
+    </div>
+</body>
+</html>

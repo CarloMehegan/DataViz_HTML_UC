@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Union Central Data</title>
+    <link rel="stylesheet" href="./resources/style1.css">
     <style>
         .container {
             display: flex;
-            justify-content: space-between;
+            overflow-x: auto; /* Allows horizontal scrolling if the content is wider than the screen */
+            padding-bottom: 10px; /* Adds space below the container */
         }
         .column {
-            
+            flex: 0 0 864px; /* This prevents the columns from shrinking or growing */
+            margin-right: 20px; /* Adds space between columns */
         }
         img {
-            width: 94%; /*this darn image map is so finnicky*/
-            height: auto;
+            width: 100%; /* Makes the image fill the column */
+            height: auto; /* Maintains aspect ratio */
         }
     </style>
 </head>
@@ -47,7 +50,8 @@
 
         <div class="column">
             <!-- second column here -->
-            
+            <h1>Video Game Data</h1>
+            <iframe src="./resources/img/controller_by_top_game.html" height="440" width="680">
 
         </div>
 
