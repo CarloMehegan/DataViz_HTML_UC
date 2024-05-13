@@ -97,3 +97,18 @@ iframe {
     font-size: small;
     text-align: 'center'
 }
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-x: auto; /* Allows horizontal scrolling if the content is wider than the screen */
+}
+.column {
+    flex: 0 0 864px; /* This prevents the columns from shrinking or growing */
+    margin-right: 20px; /* Adds space between columns */
+}
+img {
+    width: 100%; /* Makes the image fill the column */
+    height: auto; /* Maintains aspect ratio */
+}
