@@ -112,3 +112,16 @@ img {
     width: 100%; /* Makes the image fill the column */
     height: auto; /* Maintains aspect ratio */
 }
+
+table {
+    width: 95%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+th {
+    background-color: #f2f2f2;
+    text-align: left;
+}

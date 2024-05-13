@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Union Central Data</title>
+    <link rel="stylesheet" href="./resources/style1.css">
+</head>
+<body>
+    <h1>Union Central Data - Fall 2023 Semester</h1>
+    <p>
+        Click on elements of the map below to see data from different areas of UC.
+    </p>
+
+    <div class="container">
+
+        <div class="column">
+            <img src="./resources/img/union_central_map_cropped.jpeg" usemap="#image-map-cropped-shrunk" alt="Union Central Map">
+            <map name="image-map-cropped-shrunk">
+                <area target="" alt="Pool Table 3" title="Pool Table 3" href="pool_tables.html" coords="502,221,613,357" shape="rect">
+                <area target="" alt="Pool Table 2" title="Pool Table 2" href="pool_tables.html" coords="606,501,470,398" shape="rect">
+                <area target="" alt="Pool Table 1" title="Pool Table 1" href="pool_tables.html" coords="433,550,571,652" shape="rect">
+                <area target="" alt="Shuffleboard Table" title="Shuffleboard Table" href="pool_tables.html" coords="672,318,726,517" shape="rect">
+                <area target="" alt="Board Games" title="Board Games" href="board_games.html" coords="85,577,231,701" shape="rect">
+                <area target="" alt="Attendant Desk - Occupancy Data" title="Attendant Desk - Occupancy Data" href="occupancy.html" coords="598,648,726,727" shape="rect">
+                <area target="" alt="Air Hockey Table" title="Air Hockey Table" href="pool_tables.html" coords="759,446,837,554" shape="rect">
+                <area target="" alt="Foosball Table" title="Foosball Table" href="pool_tables.html" coords="752,218,835,323" shape="rect">
+                <area target="" alt="Union Central" title="Union Central" href="https://www.wm.edu/offices/sue/gamesroom/" coords="260,446,94" shape="circle">
+                <area target="" alt="Wii" title="Wii" href="video_games.html" coords="301,280,40" shape="circle">
+                <area target="" alt="Playstation" title="Playstation" href="video_games.html" coords="323,199,40" shape="circle">
+                <area target="" alt="Xbox" title="Xbox" href="video_games.html" coords="344,125,34" shape="circle">
+            </map>
+        </div>
+
+        <div class="column">
+            <!-- second column here -->
+            <h1>Board Game Data</h1>
+            <p>
+                There were 112 recorded table game rentals between August 25, 2023, and December 17, 2023. Our analysis covers <b>105</b> sanitized entries. The other entries were missing information and were removed during the data cleansing process. Below is an excerpt of the data, with names and student IDs replaced with anonymous, unique IDs. There were <b>64</b> unique table game renters.
+            </p>
+
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Unique ID</th>
+                    <th>Game</th>
+                    <th>Time In</th>
+                    <th>Time Out</th>
+                    <th>Duration (minutes)</th>
+                </tr>
+                <tr>
+                    <td>9/3</td>
+                    <td>26</td>
+                    <td>Taboo</td>
+                    <td>15:34</td>
+                    <td>16:03</td>
+                    <td>29</td>
+                </tr>
+                <tr>
+                    <td>9/3</td>
+                    <td>27</td>
+                    <td>Chess</td>
+                    <td>21:28</td>
+                    <td>21:57</td>
+                    <td>29</td>
+                </tr>
+                <tr>
+                    <td>9/5</td>
+                    <td>28</td>
+                    <td>Chess</td>
+                    <td>12:45</td>
+                    <td>13:36</td>
+                    <td>51</td>
+                </tr>
+                <tr>
+                    <td>9/7</td>
+                    <td>25</td>
+                    <td>Ticket to Ride</td>
+                    <td>19:00</td>
+                    <td>19:57</td>
+                    <td>57</td>
+                </tr>
+                <tr>
+                    <td>9/8</td>
+                    <td>25</td>
+                    <td>Catan</td>
+                    <td>15:04</td>
+                    <td>15:28</td>
+                    <td>24</td>
+                </tr>
+                <tr>
+                    <td>9/8</td>
+                    <td>29</td>
+                    <td>Jenga</td>
+                    <td>18:12</td>
+                    <td>18:30</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>9/8</td>
+                    <td>30</td>
+                    <td>Uno</td>
+                    <td>18:25</td>
+                    <td>19:07</td>
+                    <td>42</td>
+                </tr>
+                <tr>
+                    <td>9/8</td>
+                    <td>31</td>
+                    <td>Sorry</td>
+                    <td>19:08</td>
+                    <td>19:17</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>9/8</td>
+                    <td>32</td>
+                    <td>Deck of Cards</td>
+                    <td>20:02</td>
+                    <td>20:37</td>
+                    <td>35</td>
+                </tr>
+            </table>
+
+
+            <p>
+                Board games historically have the least amount of rentals of the services offered at Union Central. This is evident in this dataset as well. Board games have barely more rentals than Shuffleboard, the lowest performing table game.
+            </p>
+
+            <iframe src="resources/img/board_game_duration_distribution.html" height="420" width="620"></iframe>
+
+            <p>
+                The histogram above shows the distribution of board game rental durations. Board game rentals average around 40 minutes, similar to pool table rentals. We were surprised that there were barely any sessions over an hour, since board games typically take a long time to play. We believe this is because most of the board games we have cater to shorter play sessions.
+            </p>
+
+            <iframe src="resources/img/board_game_frequency_vs_avr_duration.html" height="520" width="650"></iframe>
+
+            <p>
+                This scatterplot shows the average rental duration against the number of rentals for every game rented during the semester. The mouse-hover feature is especially useful for parsing this plot. At the bottom are games that were only rented once or twice. As we move up the figure, the log scale helps us group these games into popularity tiers. Chess stands out as the most popular board game. It is also interesting that Chess and the other popular board games have an average rental duration of around 40 minutes, once again paralleling the length of pool table rentals. Games with significantly longer or shorter average durations fall to the wayside with less rentals. Perhaps 40 minutes is the perfect length of time to spend at Union Central.
+            </p>
+
+
+        </div>
+
+    </div>
+</body>
+</html>

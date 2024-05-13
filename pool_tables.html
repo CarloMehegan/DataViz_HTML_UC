@@ -3,40 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./resources/style1.css">
     <title>Union Central Data</title>
+    <link rel="stylesheet" href="./resources/style1.css">
 </head>
 <body>
     <h1>Union Central Data - Fall 2023 Semester</h1>
     <p>
         Click on elements of the map below to see data from different areas of UC.
-        <br><br>
     </p>
 
     <div class="container">
+
         <div class="column">
             <img src="./resources/img/union_central_map_cropped.jpeg" usemap="#image-map-cropped-shrunk" alt="Union Central Map">
             <map name="image-map-cropped-shrunk">
                 <area target="" alt="Pool Table 3" title="Pool Table 3" href="pool_tables.html" coords="502,221,613,357" shape="rect">
                 <area target="" alt="Pool Table 2" title="Pool Table 2" href="pool_tables.html" coords="606,501,470,398" shape="rect">
                 <area target="" alt="Pool Table 1" title="Pool Table 1" href="pool_tables.html" coords="433,550,571,652" shape="rect">
-                <area target="" alt="Shuffleboard Table" title="Shuffleboard Table" href="other_tables.html" coords="672,318,726,517" shape="rect">
+                <area target="" alt="Shuffleboard Table" title="Shuffleboard Table" href="pool_tables.html" coords="672,318,726,517" shape="rect">
                 <area target="" alt="Board Games" title="Board Games" href="board_games.html" coords="85,577,231,701" shape="rect">
                 <area target="" alt="Attendant Desk - Occupancy Data" title="Attendant Desk - Occupancy Data" href="occupancy.html" coords="598,648,726,727" shape="rect">
-                <area target="" alt="Air Hockey Table" title="Air Hockey Table" href="other_tables.html" coords="759,446,837,554" shape="rect">
-                <area target="" alt="Foosball Table" title="Foosball Table" href="other_tables.html" coords="752,218,835,323" shape="rect">
+                <area target="" alt="Air Hockey Table" title="Air Hockey Table" href="pool_tables.html" coords="759,446,837,554" shape="rect">
+                <area target="" alt="Foosball Table" title="Foosball Table" href="pool_tables.html" coords="752,218,835,323" shape="rect">
                 <area target="" alt="Union Central" title="Union Central" href="https://www.wm.edu/offices/sue/gamesroom/" coords="260,446,94" shape="circle">
                 <area target="" alt="Wii" title="Wii" href="video_games.html" coords="301,280,40" shape="circle">
                 <area target="" alt="Playstation" title="Playstation" href="video_games.html" coords="323,199,40" shape="circle">
                 <area target="" alt="Xbox" title="Xbox" href="video_games.html" coords="344,125,34" shape="circle">
             </map>
         </div>
+
         <div class="column">
-            <img src="./resources/img/another_image.jpeg" usemap="#second-image-map" alt="Another Map">
-            <map name="second-image-map">
-                <!-- Add your second image map areas here -->
-            </map>
+            <!-- second column here -->
+            <h1>Table Game Data</h1>
+            <p>
+                There were 3598 recorded table game rentals between August 24, 2023, and December 17, 2023. Our analysis covers <b>3530</b> sanitized entries. The other entries were missing information and were removed during the data cleansing process. Below is an excerpt of the data, with names and student IDs replaced with anonymous, unique IDs. There were <b>1108</b> unique table game renters.
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Unique ID</th>
+                        <th>Table Game</th>
+                        <th>Time In</th>
+                        <th>Time Out</th>
+                        <th>Table Number</th>
+                        <th>Duration (minutes)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>8/27</td>
+                        <td>110</td>
+                        <td>Pool</td>
+                        <td>13:35</td>
+                        <td>13:44</td>
+                        <td>1</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>8/27</td>
+                        <td>12</td>
+                        <td>Shuffleboard</td>
+                        <td>13:35</td>
+                        <td>13:50</td>
+                        <td>6</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>8/27</td>
+                        <td>31</td>
+                        <td>Foosball</td>
+                        <td>13:37</td>
+                        <td>14:04</td>
+                        <td>5</td>
+                        <td>27</td>
+                    </tr>
+                    <tr>
+                        <td>8/27</td>
+                        <td>104</td>
+                        <td>Air Hockey</td>
+                        <td>13:37</td>
+                        <td>13:45</td>
+                        <td>4</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>8/27</td>
+                        <td>111</td>
+                        <td>Air Hockey</td>
+                        <td>13:50</td>
+                        <td>14:07</td>
+                        <td>4</td>
+                        <td>17</td>
+                    </tr>
+                    <tr>
+                        <td>8/27</td>
+                        <td>12</td>
+                        <td>Pool</td>
+                        <td>13:51</td>
+                        <td>14:02</td>
+                        <td>2</td>
+                        <td>11</td>
+                    </tr>
+                    <tr>
+                        <td>8/27</td>
+                        <td>112</td>
+                        <td>Pool</td>
+                        <td>13:51</td>
+                        <td>14:06</td>
+                        <td>1</td>
+                        <td>15</td>
+                    </tr>
+                    <tr>
+                        <td>8/27</td>
+                        <td>113</td>
+                        <td>Pool</td>
+                        <td>14:21</td>
+                        <td>15:10</td>
+                        <td>2</td>
+                        <td>49</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <p>
+                The "Table Number" column represents which table is being rented. This is only used for pool tables (1, 2, 3), but for our analysis we filled the empty cells with 4, 5, and 6 for Air Hockey, Foosball, and Shuffleboard, respectively. If the game was Pool but the table was unspecified, we filled the cell with 0. This was useful in separating the different types of rentals.
+            </p>
+
+            <iframe src="resources/img/table_games_pie_chart.html" height="420" width="620"></iframe>
+
+            <p>
+                The figure above shows the different table games and how many rentals each game had over the semester. Pool has the majority, but we were surprised that it was not an even larger majority. Shuffleboard had the least rentals, but it was also surprising to us that our least popular table still had almost a hundred rentals.
+            </p>
+
+            <iframe src="resources/img/pool_duration_by_table_number.html" height="450" width="840"></iframe>
+
+            <p>
+                There is not much difference between the three pool tables. This figure shows the distribution of rental duration for each table, and they all have nearly identical interquartile ranges. The median rental duration for all of the tables is approximately 40 minutes. The number of rentals for each table was as follows:
+            </p>
+
+            <table>
+                <tr>
+                    <th>Table Number</th>
+                    <th>Number of Rentals</th>
+                </tr>
+                <tr>
+                    <td>Table 1</td>
+                    <td>872</td>
+                </tr>
+                <tr>
+                    <td>Table 2</td>
+                    <td>789</td>
+                </tr>
+                <tr>
+                    <td>Table 3</td>
+                    <td>797</td>
+                </tr>
+                <tr>
+                    <td>Table number not recorded</td>
+                    <td>22</td>
+                </tr>
+            </table>
+
+            <p>
+                Each table had roughly he same number of rentals. Table 1, the table closest to the attendant desk, has a bit more than the other two, and we suspect it is because of that proximity. The next three figures show the distribution of rental duration for Air Hockey, Foosball, and Shuffleboard.
+            </p>
+
+            <iframe src="resources/img/air_hockey_duration_distribution.html" height="420" width="620"></iframe>
+            <iframe src="resources/img/foosball_duration_distribution.html" height="420" width="620"></iframe>
+            <iframe src="resources/img/shuffleboard_duration_distribution.html" height="420" width="620"></iframe>
+
+
+            <p>
+                All three of the other table games have similar distributions to their rental durations. Rentals are typically between five to fifteen minutes long, with some rare, longer sessions. These rentals are much shorter on average than pool table rentals.
+            </p>
+
+
         </div>
+
     </div>
 </body>
 </html>
