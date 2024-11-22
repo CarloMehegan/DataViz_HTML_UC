@@ -1,6 +1,6 @@
 to do
 
-- [ ] add a readme
+- [x] add a readme
 
 - [ ] add parsing code to repo and explain it in the readme
 
@@ -10,7 +10,7 @@ to do
 
     - [ ] automate parsing script for ongoing fall 24 data
 
-- [ x ] remove extraneous html files (and other files)
+- [x] remove extraneous html files (and other files)
 
 - [ ] add andrew's sheets to csv script and explain it in the readme
 
