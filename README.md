@@ -18,28 +18,29 @@ to do
 
 - [ ] make the pages nice, add buttons and things, new pages for diff semesters,...
 
+---
 
 # Visualizing Union Central
 
 Contributors: Carlo Mehegan, David Cho, Violet Shi, Andrew Choi
 
-##### Project goals
+### Project goals
 
 ...
 
-##### What the data looks like
+### What the data looks like
 
 (explain each table, similar to the writeup)
 
-##### Google Sheets to CSV
+### Google Sheets to CSV
 
 ...
 
-##### Cleaning and parsing the data
+### Cleaning and parsing the data
 
 ...
 
 
-# Creating and updating visualizations
+### Creating and updating visualizations
 
 ...
