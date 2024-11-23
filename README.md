@@ -62,8 +62,6 @@ Table Game Data is collected in another table. Names and IDs have been removed a
 |         | Pool       | 1:12  | 1:18  | 1       |
 
 ---
-
-### Video Game Data
 Video Game Data is collected in another table. Names and IDs have been removed. There are **448 rental records** for video games.
 
 | Date | Console | Game             | Controllers | In    | Out   |
