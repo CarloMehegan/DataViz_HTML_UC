@@ -4,9 +4,17 @@ Contributors: Carlo Mehegan, David Cho, Violet Shi, Andrew Choi
 
 ## 🎯 Project goals
 
-...
+One of our group members works at Union Central, the games room in Sadler. During shifts, employees log occupancy and rentals. In a previous project for DATA303: Data Visualization, the UC Fall 2023 rental data was cleansed and analyzed, with the results and visualizations hosted on a static Github Pages site ([https://carlomehegan.github.io/DataViz_HTML_UC/](https://carlomehegan.github.io/DataViz_HTML_UC/)).
 
-### Obtaining the data
+Our goal for the next phase of this project, for DATA440-6: Automations and Workflows, is to make it easier to expand this project with new data.
+
+There are three parts we have highlighted for optimization:
+
+1. Taking the data from Union Central's Google Sheets tables and turning them into raw CSVs we can work with
+2. Cleansing the CSVs (removing blank lines, fixing errors, anonymizing data)
+3. Remaking the site's visualizations to reflect new data
+
+## I. Obtaining the data
 
 The data is collected from Union Central's rental spreadsheet, recorded in Google Sheets by game attendants as rentals come in. The raw data is private, as it contains names and IDs of students, but cleaned and anonymized versions of the datasets are available for viewing in the `clean_data` folder.
 
@@ -64,43 +72,38 @@ Board Game Data is collected in another table. Names and IDs have been removed. 
 
 ### Google Sheets to CSV
 
-TODO andrew
+Rental data is recorded every day by employees at Union Central. We would like to collect this data as often as possible to keep the site's visualizations for the current semester up to date. To do this, we have created a script that works with Google Sheets' API to pull the data when executed. This can be found in [src/sheets_to_csv.py](src/sheets_to_csv.py). Currently, the script uses a dummy data set.
 
+## II. Cleaning and parsing the data
 
-### Cleaning and parsing the data
+As listed above, there are four datasets to work with. Table games, video games, and board games are all fairly similar, with occupancy being the odd one out.
 
-TODO carlo
+For table games, video games, and board games, data cleansing follows this process:
 
----
+1. Remove empty columns or extraneous columns that showed up when converting from Sheets to CSV
+2. Fill the date column. The date column is typically only filled out for the first rental of the day, to mark where one day ends and the next day begins. For our purposes we want to "fill down" so that each rental has its proper date.
+3. Identify, try to amend, and finally, remove any bad rows. A "bad row" has empty cells or does not match the typical format of a rental. Optionally, move bad rows to a separate CSV instead of dropping them, in case there are patterns in these "bad rows" that we can try to accommodate for. For example, if only the student ID is missing from the rental, we do not need to count it as a bad row, since we anonymize the data anyways.
+4. Anonymize the data. Either remove all names and IDs, or give each person a new, unique identifier to preserve the relationship between rentals. This relationship data is not currently utilized, but may be valuable for future analysis.
+5. (For the table games dataset) Fill pool table numbers. The "table number" column contains 1, 2, or 3 to denote which of the three pool tables is in use. This helps employees track which renter is at which table. The column is empty for other games, like air hockey. To make sure nothing goes wrong later down the line, we fill all cells in this column, even if the rental wasn't for a pool table. Currently, 0 = Pool table rental with no recorded table number, 1-3 = Respective pool table, 4 = Air Hockey, 5 = Foosball, 6 = Shuffleboard.
+6. Make sure all times in the Time In and Time Out columns are formatted correctly, in preparation for step 7.
+7. Convert all times to military time. The recorded times have AM/PM ambiguity, so it's unclear if a rental was made at 10:15am or 10:15pm. To fix this, we convert all times to military time, assuming that rentals before noon each day are AM and rentals after noon each day are PM.
+8. Add a "Durations" column. This takes our nice, new military times, calculates the length of the rental in minutes, and appends it to the end of each row. Duration is used for a lot of analysis, so it's worth calculating here instead of doing it multiple times later.
+9. For board games, we also fix the "Other" discrepancy mentioned in the previous section by merging the "Game" and "Notes" columns.
 
-to do
+Cleaning the occupancy data is much simpler. We remove bad rows and we convert everything to military time using the same method described in step 7.
 
-- [x] add a readme
+The cleansing code is not public in this repository yet. The scripts for each step are scattered between different Jupyter notebooks, and we are still chaining them together into a manageable script.
 
-- [ ] add parsing code to repo and explain it in the readme
+## III. Creating visualizations with Plotly
 
-    - [ ] get parsing script working on fall 23 data
+All of the visualizations on the site ([https://carlomehegan.github.io/DataViz_HTML_UC/](https://carlomehegan.github.io/DataViz_HTML_UC/)) are created with Plotly. Plotly lets us generate static, HTML visualizations that can be embedded on the site. And you can interact with them!
 
-    - [ ] stress test parsing script using spring 24 data
+Like the parsing scripts, our Plotly scripts are a bit scattered between different Jupyter notebooks. The next step for this part of the project is to create a script that will re-build all of the Plotly graphs on the website using the most up to date data. We currently do not have this code avaiable for viewing in this repository.
 
-    - [ ] automate parsing script for ongoing fall 24 data
+## IV. Automation
 
-- [x] remove extraneous html files (and other files)
+Once we have the previous three steps completed, we would like to create some kind of automatic routine that runs all three parts and keeps the website updated.
 
-- [ ] add andrew's sheets to csv script and explain it in the readme
+## V. Website
 
-- [ ] explain how to use the parsed data to create new viz, in the readme
-
-- [ ] add new viz and update pages
-
-- [ ] patch together sheets to csv to parsed csv to updated graphs workflow
-
-- [ ] look into automating the workflow (heroku scheduling?)
-
-- [ ] make the pages nice, add buttons and things, new pages for diff semesters,...
-
-
-
-### Creating and updating visualizations
-
-...
+Currently, the website shows Fall 2023 data. Once our scripts are complete, w will stress test them using the Spring 2024 data, and then test our automation from Part IV. using the live Fall 2024 and the future Spring 2025 data.
