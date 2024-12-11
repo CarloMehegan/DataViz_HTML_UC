@@ -1,5 +1,7 @@
 # Visualizing Union Central
 
+View the site life here: [https://carlomehegan.github.io/DataViz_HTML_UC/](https://carlomehegan.github.io/DataViz_HTML_UC/)
+
 Contributors: Carlo Mehegan, David Cho, Violet Shi, Andrew Choi
 
 ## 🎯 Project goals
