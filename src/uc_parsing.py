@@ -11,6 +11,75 @@ def save_csv(data, file_path):
         writer.writerows(data)
 
 
+def clean_board_games(raw_filepath,
+                      bad_filepath,
+                      clean_filepath,
+                      last_real_column_index = 6
+                     ):
+    """
+    Runs all of the parsing steps
+
+    Filepath inputs are most likely:
+        "../raw_data/board_games_raw.csv",
+        "../raw_data/f23_board_games_bad_rows.csv",
+        "../clean_data/f23_board_games_cleaned.csv"
+    
+    last_real_column_index (int): I'll think of a better name later...
+    All of the spreadsheets tend to have empty/ghost columns at the end.
+    This parameter specifies how many columns to keep.
+    Columns after this are removed.
+    """
+    data = read_csv(raw_filepath)
+
+    print("Parsing CSV at:", raw_filepath)
+
+    data = resolve_board_game_notes_column(data)
+    data = remove_empty_columns(data, last_real_column_index)
+    data = fill_date_column(data)
+    data = remove_bad_rows(data, bad_filepath)
+    data = anonymize_rows(data)
+    check_invalid_times(data)
+    data = fix_time_disparity(data)
+    data = add_duration_column(data)
+
+    print("Parsing complete! First 5 rows:")
+    for i in range(5):
+        print(data[i])
+
+    save_csv(data, clean_filepath)
+    print("Cleaned CSV saved to:", clean_filepath)
+
+
+
+def resolve_board_game_notes_column(data: list[list[str]]) -> list[list[str]]:
+    """
+    Replaces 'Other' in the 'Game' column with the value from the 'Notes' column, if available.
+    Automatically locates the "Game" and "Notes" columns.
+
+    This was done manually in the original parsing.
+    Technically this is "step 0" for board games.
+    """
+    header = data[0]
+    rows = data[1:]
+
+    # Find indices for "Game" and "Notes" columns
+    try:
+        game_index = header.index("Game")
+        notes_index = header.index("Notes")
+    except ValueError as e:
+        raise ValueError("Required columns 'Game' or 'Notes' are missing.") from e
+
+    resolved_rows = []
+    for row in rows:
+        if row[game_index].strip().lower() == "other":  # Check if 'Game' column contains 'Other'
+            notes_value = row[notes_index].strip()  # Get the value from 'Notes' column
+            if notes_value:  # Replace 'Other' if there's a value in 'Notes'
+                row[game_index] = notes_value
+        resolved_rows.append(row)
+
+    return [header] + resolved_rows
+
+
 #parsing functions start here
 def remove_empty_columns(data: list[list[str]], end_index:int) -> list[list[str]]:
     """
@@ -69,6 +138,7 @@ def remove_bad_rows(data: list[list[str]], filepath:str) -> list[list[str]]:
 
     # Save bad rows separately
     save_csv(bad_rows, filepath)
+    print("Bad rows saved to:", filepath)
     return good_rows
 
 
@@ -134,10 +204,7 @@ def check_invalid_times(data: list[list[str]]) -> None:
 
 
 
-def fix_time_disparity(data: list[list[str]],
-                       time_in_index: int,
-                       time_out_index: int
-                      ) -> list[list[str]]:
+def fix_time_disparity(data: list[list[str]]) -> list[list[str]]:
     """
     Fixes time disparity by converting 'Time In' and 'Time Out' to 24-hour military format,
     determining AM/PM based on context.
@@ -148,9 +215,17 @@ def fix_time_disparity(data: list[list[str]],
 
     This is "step 5b" in the original parsing
     """
+
     header = data[0]
     rows = data[1:]
 
+    # Find indices for "Time In" and "Time Out" columns
+    try:
+        time_in_index = header.index("Time In")
+        time_out_index = header.index("Time Out")
+    except ValueError as e:
+        raise ValueError("Required columns 'Time In' or 'Time Out' are missing.") from e
+    
     is_it_afternoon_yet = False  # Initialize afternoon tracking flag
     previous_date = None  # Track date to reset the afternoon flag when the date changes
 
