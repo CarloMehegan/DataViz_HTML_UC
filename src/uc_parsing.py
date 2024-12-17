@@ -34,6 +34,10 @@ Steps for cleaning table games
 - (UNIQUE) Fill "Table #" column
 - (UNIQUE) Fix "Table Game" column using "Table #" (rare edge case)
 - Add "Duration (minutes)" column
+
+Steps for cleaning occupancy
+- Remove any entries that have missing values
+- Fix AM/PM time disparity
 '''
 
 #helper functions for reading and writing to csv
@@ -45,6 +49,28 @@ def save_csv(data, file_path):
     with open(file_path, mode='w', newline='') as outfile:
         writer = csv.writer(outfile)
         writer.writerows(data)
+
+def clean_occupancy(raw_filepath,bad_filepath,clean_filepath):
+    """
+    A simpler version of the clean_games function below
+
+    Occupancy is simpler to clean and structured differently from the other tables,
+    so we use a different function to clean it
+    """
+    data = read_csv(raw_filepath)
+
+    print("Parsing CSV at:", raw_filepath)
+    data = remove_empty_columns(data, 4) #occupancy has 4 columns
+    data = remove_bad_rows_occupancy(data, bad_filepath)
+    data = fix_time_disparity_occupancy(data)
+
+    print("Parsing complete! First 5 rows:")
+    for i in range(5):
+        print(data[i])
+
+    save_csv(data, clean_filepath)
+    print("Cleaned CSV saved to:", clean_filepath)
+    pass
 
 #main function to call to clean a file
 def clean_games(raw_filepath,
@@ -132,7 +158,7 @@ def resolve_board_game_notes_column(data: list[list[str]]) -> list[list[str]]:
 
     resolved_rows = []
     for row in rows:
-        if row[game_index].strip().lower() == "other":  # Check if 'Game' column contains 'Other'
+        if row[game_index].strip().lower() == "other" or row[game_index].strip().lower() == "other (specify in notes)":  # Check if 'Game' column contains 'Other'
             notes_value = row[notes_index].strip()  # Get the value from 'Notes' column
             if notes_value:  # Replace 'Other' if there's a value in 'Notes'
                 row[game_index] = notes_value
@@ -180,7 +206,8 @@ def remove_bad_rows(data: list[list[str]], filepath:str) -> list[list[str]]:
     Removes rows with missing critical columns and returns good rows.
 
     filepath (str): the file to save the bad rows to.
-    NOTE: Don't save these rows to clean_data folder, save them to raw_data
+    
+    Note: Don't save these rows to clean_data folder, save them to raw_data
     Because they are likely not anonymized by this step in the process
 
     This is "step 3" in the original parsing
@@ -483,3 +510,76 @@ def fill_game_by_pool_table_number(data: list[list[str]]) -> list[list[str]]:
         updated_rows.append(row)
 
     return [header] + updated_rows
+
+
+def fix_time_disparity_occupancy(data: list[list[str]]) -> list[list[str]]:
+    """
+    Fixes time disparity for the "Time" column in the Occupancy table by converting
+    times to 24-hour military format, determining AM/PM based on context.
+
+    This is a custom version for occupancy tables with only a "Time" column.
+    """
+    header = data[0]
+    rows = data[1:]
+
+    # Find the index of the "Time" column
+    try:
+        time_index = header.index("Time")
+    except ValueError as e:
+        raise ValueError("Required column 'Time' is missing.") from e
+
+    is_it_afternoon_yet = False  # Initialize afternoon tracking flag
+    previous_date = None  # Track date to reset the afternoon flag when the date changes
+
+    adjusted_rows = []
+    for row in rows:
+        date = row[0]  # Assuming the date is in the first column
+        time = row[time_index].strip()
+
+        # Reset the afternoon flag if it's a new day
+        if date != previous_date:
+            is_it_afternoon_yet = False
+            previous_date = date
+
+        # Validate "Time"
+        if not is_valid_time(time):
+            print(f"Invalid time at Row {rows.index(row) + 2}: Time = '{time}'")
+            continue  # Skip this row entirely if the time is invalid
+
+        # Fix "Time"
+        hour, minute = map(int, time.split(':'))
+        if (1 <= hour <= 9) or is_it_afternoon_yet:  # Time in the afternoon
+            is_it_afternoon_yet = True  # Update afternoon status
+            hour = (hour + 12) % 24  # Convert to military time
+        row[time_index] = f"{hour:02}:{minute:02}"
+
+        # Append the adjusted row
+        adjusted_rows.append(row)
+
+    return [header] + adjusted_rows
+
+from typing import List
+
+def remove_bad_rows_occupancy(data: List[List[str]], filepath: str) -> List[List[str]]:
+    """
+    Removes rows with ANY missing values in the occupancy table and saves the bad rows.
+
+    filepath (str): the file to save the bad rows to.
+    """
+    header = data[0]
+    rows = data[1:]
+
+    good_rows = [header]
+    bad_rows = [header]
+
+    for row in rows:
+        if all(cell.strip() for cell in row):  # Check if all values are non-empty
+            good_rows.append(row)
+        else:
+            bad_rows.append(row)
+
+    # Save bad rows separately
+    save_csv(bad_rows, filepath)
+    print(f"Bad rows saved to: {filepath}")
+
+    return good_rows
