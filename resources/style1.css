@@ -183,6 +183,33 @@ th {
 }
 
 
+/* Tabs Navigation Styling */
+.tabs {
+    display: flex;
+    justify-content: center; /* Center the tabs horizontally */
+    background-color: var(--back); /* Match background color */
+    border-bottom: 2px solid #ddd; /* Add a border to separate tabs */
+    margin-bottom: 20px; /* Add spacing below the tabs */
+}
+
+.tabs .tab {
+    padding: 10px 20px;
+    text-decoration: none; /* Remove underline */
+    color: var(--front); /* Match text color */
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.tabs .tab:hover {
+    background-color: #f2f2f2; /* Highlight on hover */
+    color: var(--link); /* Change color on hover */
+}
+
+.tabs .active {
+    border-bottom: 3px solid var(--link); /* Highlight active tab */
+    color: var(--link); /* Active tab color */
+}
+
 
 
 @media (max-width: 1200px) {
