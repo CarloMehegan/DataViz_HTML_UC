@@ -28,6 +28,7 @@
 }
 
 
+
 html {
     margin: 20px;
     padding: 0px;
@@ -43,12 +44,25 @@ div {
 body {
     background-color: var(--back);
     color: var(--front);
-    /*font-family: 'Times New Roman', Times, serif;*/
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     padding-bottom: 20px;
     height: 100%;
-    width: 100%
+    width: 100%;
+    text-align: center;
 }
+
+table, iframe, img, div.column {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; /* Ensures inline content inside blocks is centered */
+    display: block; /* For proper horizontal centering */
+}
+
+/* Center text content inside div.column */
+.column {
+    text-align: center;
+}
+
 
 h1 {
     font-family: var(--header-font)
@@ -98,7 +112,6 @@ iframe {
     text-align: 'center'
 }
 
-
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -125,3 +138,144 @@ th {
     background-color: #f2f2f2;
     text-align: left;
 }
+
+.right-images {
+    display: flex;
+    justify-content: flex-start; /* Align image slightly to the right */
+    align-items: flex-start; /* Align image to the top */
+    margin-left: 50px; /* Push image to the right */
+    margin-top: 10px; /* Bring image closer to the top */
+    flex-grow: 1; /* Allow white space usage */
+}
+
+.clickable-img {
+    width: 180px; /* Smaller image size */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove inline spacing */
+    border: 2px solid #ccc; /* Add a subtle border */
+    transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.clickable-img:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    border-color: #666; /* Darker border on hover */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Spread map and right images apart */
+    align-items: flex-start; /* Align everything to the top */
+    padding-top: 10px; /* Add minimal space from top */
+    padding-bottom: 20px; /* Extra breathing room at bottom */
+}
+
+.column img {
+    width: 90%; /* Map fits nicely */
+    height: auto;
+}
+
+.image-stack {
+    display: flex;
+    flex-direction: column; /* Stack images vertically */
+    gap: 10px; /* Add spacing between images */
+
+
+}
+
+
+
+
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center-align all content */
+    }
+
+    .column {
+        width: 90%; /* Map takes full width */
+        margin-bottom: 10px; /* Small space below the map */
+    }
+
+    .column img {
+        width: 100%; /* Make the map responsive */
+        height: auto; /* Maintain aspect ratio */
+    }
+
+    .right-images {
+        margin-left: 0; /* Remove unwanted left margin */
+        margin-top: 10px; /* Minimal space above images */
+        width: 90%; /* Take full width */
+        display: flex;
+        flex-direction: column; /* Stack images vertically */
+        align-items: center; /* Center the images */
+        gap: 10px; /* Add small spacing between images */
+    }
+
+    .image-stack {
+        width: 100%; /* Allow images to scale */
+        display: flex;
+        flex-direction: row; /* Place images horizontally */
+        flex-wrap: wrap; /* Wrap to new row if needed */
+        justify-content: center; /* Center-align images */
+        gap: 10px; /* Space between images */
+    }
+
+    .clickable-img {
+        width: 140px; /* Adjust size for small screens */
+        height: auto; /* Maintain aspect ratio */
+    }
+}
+
+@media (max-width: 1000px) {
+    .image-stack {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Two columns */
+        gap: 5px; /* Minimal spacing between images */
+        align-items: center;
+        justify-items: center;
+    }
+
+    .clickable-img {
+        width: 100%; /* Adjust image size */
+        max-width: 200px; /* Prevent images from being oversized */
+        margin: 0; /* No margins */
+    }
+}
+
+/* Media query for very small screens (e.g., phones) */
+@media (max-width: 800px) {
+    .container {
+        flex-direction: column;
+        padding: 0; /* Remove container padding */
+        margin: 0; /* No margins */
+    }
+
+    .column {
+        margin: 0; /* Remove all margins */
+        padding: 0; /* No padding */
+    }
+
+    .column img {
+        width: auto; /* Full width for UC map */
+        margin: auto; /* Remove margins */
+    }
+
+    .right-images {
+        width: 100%;
+        margin: 0; /* No margins */
+        padding: 0;
+    }
+
+    .image-stack {
+        flex-direction: column; /* Stack images vertically */
+        align-items: center; /* Center images */
+        gap: 0; /* Remove gaps between images */
+    }
+
+    .clickable-img {
+        width: 100%; /* Single column, full width */
+        max-width: 200px; /* Prevent images from being oversized */
+        margin: 0; /* No margins */
+    }
+}
+
