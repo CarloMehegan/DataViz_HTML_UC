@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <div class="tabs">
+        <a href="occupancy.html" class="tab">Fall 2023</a>
+        <a href="occupancy_spring2024.html" class="tab active">Spring 2024</a>
+        <a href="occupancy_fall2024.html" class="tab">Fall 2024</a>
+    </div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Union Central Data</title>
+    <link rel="stylesheet" href="./resources/style1.css">
+</head>
+<body>
+    <h1>Union Central Data - Spring 2024 Semester</h1>
+    <p>
+        Click on elements of the map below to see data from different areas of UC. 
+        Alternatively, click the images on the right (Or below the map on mobile and smaller screens).
+    </p>
+
+    <div class="container">
+
+        <div class="column">
+            <img src="./resources/img/union_central_map_cropped.jpeg" usemap="#image-map-cropped-shrunk" alt="Union Central Map">
+            <map name="image-map-cropped-shrunk">
+                <area target="" alt="Pool Table 3" title="Pool Table 3" href="pool_tables.html" coords="502,221,613,357" shape="rect">
+                <area target="" alt="Pool Table 2" title="Pool Table 2" href="pool_tables.html" coords="606,501,470,398" shape="rect">
+                <area target="" alt="Pool Table 1" title="Pool Table 1" href="pool_tables.html" coords="433,550,571,652" shape="rect">
+                <area target="" alt="Shuffleboard Table" title="Shuffleboard Table" href="pool_tables.html" coords="672,318,726,517" shape="rect">
+                <area target="" alt="Board Games" title="Board Games" href="board_games.html" coords="85,577,231,701" shape="rect">
+                <area target="" alt="Attendant Desk - Occupancy Data" title="Attendant Desk - Occupancy Data" href="occupancy.html" coords="598,648,726,727" shape="rect">
+                <area target="" alt="Air Hockey Table" title="Air Hockey Table" href="pool_tables.html" coords="759,446,837,554" shape="rect">
+                <area target="" alt="Foosball Table" title="Foosball Table" href="pool_tables.html" coords="752,218,835,323" shape="rect">
+                <area target="" alt="Union Central" title="Union Central" href="https://www.wm.edu/offices/sue/gamesroom/" coords="260,446,94" shape="circle">
+                <area target="" alt="Wii" title="Wii" href="video_games.html" coords="301,280,40" shape="circle">
+                <area target="" alt="Playstation" title="Playstation" href="video_games.html" coords="323,199,40" shape="circle">
+                <area target="" alt="Xbox" title="Xbox" href="video_games.html" coords="344,125,34" shape="circle">
+            </map>
+        </div>
+        <div class="right-images">
+            <!-- Container for stacking images vertically -->
+            <div class="image-stack">
+                <!-- Board Game Image -->
+                <a href="board_games_spring2024.html">
+                    <img src="./resources/img/boardgamestab.jpg" alt="Board Games" class="clickable-img">
+                </a>
+                <!-- Table Game Image -->
+                <a href="pool_tables_spring2024.html">
+                    <img src="./resources/img/tablegamestab.jpg" alt="Table Games" class="clickable-img">
+                </a>
+                <!-- Video Game Image -->
+                <a href="video_games_spring2024.html">
+                    <img src="./resources/img/videogamestab.jpg" alt="Video Games" class="clickable-img">
+                </a>
+                <!-- Occupancy Image -->
+                <a href="occupancy_spring2024.html">
+                    <img src="./resources/img/occupancytab.jpg" alt="Table Games" class="clickable-img">
+                </a>
+            </div>
+        </div>
+
+        <div class="column">
+            <!-- second column here -->
+            <h1>Occupancy Data</h1>
+            <p>
+                <!-- Every 10-30 minutes, the Union Central attendant on shift takes a headcount of how many people are in the area and logs it. There were 2442 occupancy logs recorded between August 24, 2023, and December 19, 2023. Our analysis covers <b>2421</b> sanitized entries. The other entries were missing information and were removed during the data cleansing process. Below is an excerpt of the data. -->
+                Every 10-30 minutes, the Union Central attendant on shift takes a headcount of how many people are in the area and logs it. The visualizations below pertain to the headcount data from the Spring 2024 semester.
+            </p>
+
+            <!-- <table>
+                <tr>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Headcount</th>
+                    <th>Time of Recording</th>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>9/30/2023</td>
+                    <td>0</td>
+                    <td>18:00</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>9/30/2023</td>
+                    <td>2</td>
+                    <td>18:08</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>9/30/2023</td>
+                    <td>4</td>
+                    <td>18:17</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>9/30/2023</td>
+                    <td>10</td>
+                    <td>19:11</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>9/30/2023</td>
+                    <td>6</td>
+                    <td>19:13</td>
+                </tr>
+                <tr>
+                    <td>Saturday</td>
+                    <td>9/30/2023</td>
+                    <td>2</td>
+                    <td>19:31</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>8/31/2023</td>
+                    <td>2</td>
+                    <td>10:01</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>8/31/2023</td>
+                    <td>0</td>
+                    <td>10:30</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>8/31/2023</td>
+                    <td>2</td>
+                    <td>11:13</td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>8/31/2023</td>
+                    <td>0</td>
+                    <td>11:36</td>
+                </tr>
+            </table> -->
+
+
+            <p>
+                For our occupancy analysis, we looked at the total occupancies across different days of the week in order to see how traffic through Union Central changed day to day.
+            </p>
+
+            <iframe src="resources/img/occupancy_by_weekday.html" height="420" width="620"></iframe>
+
+            <p>
+                In the figure above, we sum all of the headcounts by day of the week. We expect the weekends to be more popular than the weekdays. We are also open two hours later on Friday and Saturday, which contributes to why these two days may have a higher total compared to the others.
+            </p>
+
+            <iframe src="resources/img/occupancy_by_month.html" height="420" width="620"></iframe>
+
+            <p>
+                This figure splits the data further into months. Plotly allows you to double-click on a category in the legend to isolate it, which helps for understanding this plot.
+            </p>
+
+
+        </div>
+
+    </div>
+</body>
+</html>
