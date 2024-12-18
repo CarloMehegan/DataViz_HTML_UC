@@ -76,9 +76,53 @@ Here is an excerpt from the **occupancy data**. Time between occupancy recording
 | 9/19  | Uno                   | 7:18  | 7:55  |                  |
 
 
-### Google Sheets to CSV
+### Google Sheets to CSV Setup
 
 Rental data is recorded every day by employees at Union Central. We would like to collect this data as often as possible to keep the site's visualizations for the current semester up to date. To do this, we have created a script that works with Google Sheets' API to pull the data when executed. This can be found in [src/sheets_to_csv.py](src/sheets_to_csv.py).
+
+To interact with Google Sheets' API you'll need to setup the Google Sheets API properly as well as authenticate your app to access the data. A step-by-step guide to help with configuring the Google Sheets API for your environment is posted right below. If there are any issues you can also refer to this documentation: https://developers.google.com/sheets/api/quickstart/python
+
+**Prerequisites**
+- Python 3.10.7 or greater
+- The pip package management tool
+- A Google Cloud project (you’ll need to set up a project in the Google Cloud Console)
+- A Google Account
+
+**Enable the Google Sheets API**
+1. Go to the Google Cloud Console
+2. Create a new project or select an existing one.
+3. Navigate to APIs & Services > Library and search for Google Sheets API
+4. Click Enable to activate the Google Sheets API for your project
+
+**Configure OAuth Consent Screen**
+1. Go to APIs & Services > OAuth consent screen.
+2. Select User type (our case we chose External so anyone with a Google Account can test this).
+3. Complete the registration form by first adding the name of the project and making sure to fill out the support email and the developer contact information with the same email address
+4. Add scopes (permission) by clicking on "add or remove scopes" and choosing Google Sheets API (/auth/spreadsheets)
+5. Add yourself and others as Test Users
+
+**Create OAuth 2.0 Credentials**
+1. In the Google Cloud Console, go to Credentials under APIs & Services.
+2. Click Create Credentials > OAuth 2.0 Client ID.
+3. Choose Application type > Desktop app (call this anything you want).
+4. Name the credential (e.g., “Google Sheets API”).
+5. Click Create, then download the credentials.json file and save it to your project directory.
+
+**Install Required Python Libraries**
+In order to interact with Google Sheets API, there are 3 necessary libraries that need to be installed by running the following command in your terminal:
+```python
+pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+```
+
+**Authentication and Token Setup**
+1. When you first run the application, it will prompt you to authenticate using your Google Account.
+2. Follow the prompts to sign in and grant permission for your app to access the Google Sheets data.
+3. After successful authentication, the app will save the credentials in a file called token.json in your project directory. This token allows the app to access the Google Sheets API without requiring re-authentication in future runs.
+
+You should now be ready to run the following script:
+```python
+python sheets_to_csv.py
+```
 
 ## II. 🧹 Cleaning and parsing the data
 
