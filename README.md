@@ -16,6 +16,10 @@ There are three parts we have highlighted for optimization:
 2. Cleansing the CSVs (removing blank lines, fixing errors, anonymizing data)
 3. Remaking the site's visualizations to reflect new data
 
+## 0. Structure of this repository.
+
+The `src` folder contains Python scripts used to collect, parse, and visualize data. You can find parsed and anonymized versions of the data in the `clean_data` folder. The `resources` folder contains assets like images, stylesheets, and Plotly files. The HTML files for the sites' pages are located in the main directory. Our DATA440-6 Project Writeup is located in the `project_proposal_writeup` folder.
+
 ## I. 🔍 Obtaining the data
 
 The data is collected from Union Central's rental spreadsheet, recorded in Google Sheets by game attendants as rentals come in. The raw data is private, as it contains names and IDs of students, but cleaned and anonymized versions of the datasets are available for viewing in the `clean_data` folder.
@@ -74,7 +78,7 @@ Here is an excerpt from the **occupancy data**. Time between occupancy recording
 
 ### Google Sheets to CSV
 
-Rental data is recorded every day by employees at Union Central. We would like to collect this data as often as possible to keep the site's visualizations for the current semester up to date. To do this, we have created a script that works with Google Sheets' API to pull the data when executed. This can be found in [src/sheets_to_csv.py](src/sheets_to_csv.py). Currently, the script uses a dummy data set.
+Rental data is recorded every day by employees at Union Central. We would like to collect this data as often as possible to keep the site's visualizations for the current semester up to date. To do this, we have created a script that works with Google Sheets' API to pull the data when executed. This can be found in [src/sheets_to_csv.py](src/sheets_to_csv.py).
 
 ## II. 🧹 Cleaning and parsing the data
 
@@ -100,12 +104,12 @@ The cleansing code is not public in this repository yet. The scripts for each st
 
 All of the visualizations on the site ([https://carlomehegan.github.io/DataViz_HTML_UC/](https://carlomehegan.github.io/DataViz_HTML_UC/)) are created with Plotly. Plotly lets us generate static, HTML visualizations that can be embedded on the site. And you can interact with them!
 
-Like the parsing scripts, our Plotly scripts are a bit scattered between different Jupyter notebooks. The next step for this part of the project is to create a script that will re-build all of the Plotly graphs on the website using the most up to date data. We currently do not have this code avaiable for viewing in this repository.
+Like the parsing scripts, our Plotly scripts are a bit scattered between different Jupyter notebooks. We created a script that rebuilds all of these Plotly graphs, in order to keep the graphs on the site up to date.
 
 ## IV. 🤖 Automation
 
-Once we have the previous three steps completed, we would like to create some kind of automatic routine that runs all three parts and keeps the website updated. We've looked into Heroku as a platform for this.
+Once we have the previous three steps completed, we would like to create some kind of automatic routine that runs all three parts and keeps the website updated. We've looked into Heroku as a platform for this, and plan to implement this for the Spring 2025 semester.
 
 ## V. 🌐 Website
 
-Currently, the website shows Fall 2023 data. Once our scripts are complete, w will stress test them using the Spring 2024 data, and then test our automation using the live Fall 2024 and the future Spring 2025 data.
+Currently, the website shows Fall 2023, Spring 2024, and Fall 2024 data. You can navigate between semesters using the top navigation bar and navigate between types of rental data using the map or the side buttons.
