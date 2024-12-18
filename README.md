@@ -16,7 +16,7 @@ There are three parts we have highlighted for optimization:
 2. Cleansing the CSVs (removing blank lines, fixing errors, anonymizing data)
 3. Remaking the site's visualizations to reflect new data
 
-## 0. Structure of this repository.
+## 0. Structure of this repository
 
 The `src` folder contains Python scripts used to collect, parse, and visualize data. You can find parsed and anonymized versions of the data in the `clean_data` folder. The `resources` folder contains assets like images, stylesheets, and Plotly files. The HTML files for the sites' pages are located in the main directory. Our DATA440-6 Project Writeup is located in the `project_proposal_writeup` folder.
 
