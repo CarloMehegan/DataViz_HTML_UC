@@ -144,6 +144,8 @@ Cleaning the occupancy data is much simpler. We remove bad rows and we convert e
 
 The cleansing script can be found in `src/uc_parsing.py`. This script is able to parse all four types of rental data we are analyzing.
 
+It is important to note here that we have the raw_data in .gitignore because that data is confidential and only accessible by UC employees.
+
 ## III. 📈 Creating visualizations with Plotly
 
 All of the visualizations on the site ([https://carlomehegan.github.io/DataViz_HTML_UC/](https://carlomehegan.github.io/DataViz_HTML_UC/)) are created with Plotly. Plotly lets us generate static, HTML visualizations that can be embedded on the site. And you can interact with them!
