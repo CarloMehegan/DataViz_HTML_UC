@@ -98,7 +98,7 @@ For table games, video games, and board games, data cleansing follows this proce
 
 Cleaning the occupancy data is much simpler. We remove bad rows and we convert everything to military time using the same method described in step 7.
 
-The cleansing code is not public in this repository yet. The scripts for each step are scattered between different Jupyter notebooks, and we are still chaining them together into a manageable script.
+The cleansing script can be found in `src/uc_parsing.py`. This script is able to parse all four types of rental data we are analyzing.
 
 ## III. 📈 Creating visualizations with Plotly
 
