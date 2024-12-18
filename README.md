@@ -156,4 +156,7 @@ Once we have the previous three steps completed, we would like to create some ki
 
 ## V. 🌐 Website
 
-Currently, the website shows Fall 2023, Spring 2024, and Fall 2024 data. You can navigate between semesters using the top navigation bar and navigate between types of rental data using the map or the side buttons.
+The website has been updated to show Fall 2023, Spring 2024, and Fall 2024 data. You can navigate between semesters using the top navigation bar and navigate between types of rental data using the map or the side buttons. These additions allow for users to navigate and manage semester-specific data easily.
+- Tabs: Each semester (e.g., Fall 2024, Spring 2025) is organized into a separate tab for easy access.
+- Buttons: Action buttons within each tab enable tasks to see updated data. You are able to click both the boxed buttons on the right as well as the ones on the map. 
+- Responsive Design: The tabs and buttons are styled for a clean, user-friendly experience across all devices.
