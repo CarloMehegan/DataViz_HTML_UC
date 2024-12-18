@@ -923,7 +923,7 @@ def _occupancy_by_month_and_weekday(filepath: str, semester_name: str = "") -> N
     data = pd.read_csv(filepath)
 
     # Extract the month name from the Date column
-    data['Month'] = pd.to_datetime(data['Date']).dt.strftime('%B')  # Converts to month names
+    data['Month'] = pd.to_datetime(data['Date'], format = "mixed").dt.strftime('%B')  # Converts to month names
     data['Day'] = pd.Categorical(data['Day'], categories=["Monday", "Tuesday", "Wednesday", 
                                                           "Thursday", "Friday", "Saturday", 
                                                           "Sunday"], ordered=True)

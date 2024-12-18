@@ -57,12 +57,19 @@ def clean_occupancy(raw_filepath,bad_filepath,clean_filepath):
     Occupancy is simpler to clean and structured differently from the other tables,
     so we use a different function to clean it
     """
+
     data = read_csv(raw_filepath)
 
     print("Parsing CSV at:", raw_filepath)
     data = remove_empty_columns(data, 4) #occupancy has 4 columns
     data = remove_bad_rows_occupancy(data, bad_filepath)
-    data = fix_time_disparity_occupancy(data)
+
+    #fall 2024 handles times differently. AM/PM is actually specified
+    if "f24" in raw_filepath:
+        flag_out_of_range_am_pm_times(data)
+        data = convert_am_pm_times_to_military(data)
+    else:
+        data = fix_time_disparity_occupancy(data)
 
     print("Parsing complete! First 5 rows:")
     for i in range(5):
@@ -120,8 +127,15 @@ def clean_games(raw_filepath,
     data = fill_date_column(data)
     data = remove_bad_rows(data, bad_filepath)
     data = anonymize_rows(data)
-    check_invalid_times(data)
-    data = fix_time_disparity(data)
+
+    #fall 2024 handles time differently. it actually has am/pm specified
+    if "f24" in raw_filepath:
+        flag_out_of_range_am_pm_times(data)
+        data = convert_am_pm_times_to_military(data)
+    else:
+        check_invalid_times(data)
+        data = fix_time_disparity(data)
+    
     data = add_duration_column(data)
 
     #extra steps for table games
@@ -583,3 +597,75 @@ def remove_bad_rows_occupancy(data: List[List[str]], filepath: str) -> List[List
     print(f"Bad rows saved to: {filepath}")
 
     return good_rows
+
+
+
+def is_valid_am_pm_time(time_str: str) -> bool:
+    """
+    Checks if the given time string is in a valid 'HH:MM AM/PM' format.
+    """
+    try:
+        import re
+        pattern = r"^(0?[1-9]|1[0-2]):[0-5][0-9]\s?(AM|PM)$"  # Regex for HH:MM AM/PM
+        return bool(re.match(pattern, time_str.strip().upper()))
+    except Exception:
+        return False
+
+
+def flag_out_of_range_am_pm_times(data: list[list[str]]) -> None:
+    """
+    Prints any time between 1:00 AM and 9:00 AM, flagging them as possibly incorrect.
+    """
+    from datetime import datetime
+
+    header = data[0]
+    rows = data[1:]
+
+    # Find columns: "Time In", "Time Out", or "Time"
+    time_columns = [col for col in ["Time In", "Time Out", "Time"] if col in header]
+    if not time_columns:
+        print("No valid time columns ('Time In', 'Time Out', 'Time') found.")
+        return
+
+    print("Flagged rows with times between 1:00 AM and 9:00 AM:")
+    for row_num, row in enumerate(rows, start=2):
+        for col in time_columns:
+            time = row[header.index(col)].strip()
+            if is_valid_am_pm_time(time):
+                # Parse time into a datetime object
+                dt = datetime.strptime(time, "%I:%M %p")
+                if 1 <= dt.hour < 9:  # 1 AM to 9 AM
+                    print(f"Row {row_num}: {col} = '{time}'")
+
+
+def convert_am_pm_times_to_military(data: list[list[str]]) -> list[list[str]]:
+    """
+    Converts 'Time', 'Time In', and 'Time Out' columns to military (24-hour) format.
+    For Fall 2024 onwards, the AM/PM disparity is no longer present.
+    """
+    from datetime import datetime
+
+    header = data[0]
+    rows = data[1:]
+
+    # Find columns: "Time In", "Time Out", or "Time"
+    time_columns = [col for col in ["Time In", "Time Out", "Time"] if col in header]
+    if not time_columns:
+        raise ValueError("No valid time columns ('Time In', 'Time Out', 'Time') found.")
+
+    adjusted_rows = []
+    for row in rows:
+        new_row = row.copy()
+        for col in time_columns:
+            col_index = header.index(col)
+            time = new_row[col_index].strip()
+
+            # Convert only if valid
+            if is_valid_am_pm_time(time):
+                dt = datetime.strptime(time, "%I:%M %p")  # Parse as AM/PM
+                new_row[col_index] = dt.strftime("%H:%M")  # Format to military time
+            else:
+                print(f"Invalid time skipped at Row {rows.index(row) + 2}: {time}")
+        adjusted_rows.append(new_row)
+
+    return [header] + adjusted_rows
