@@ -7,10 +7,36 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
+from datetime import datetime
 
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]   # This is the perminssions of the application (we asking google for permission)
 
-SPREADSHEET_ID = "1eG9NwIeVN4hBqW0B3vhwIN4ewd1cFyeMSBbTgA3oPL4"   # right now this is the sample spreadsheet
+SPREADSHEET_ID = "YOUR_SPREADSHEET_ID_HERE"   # private google sheets ID here
+
+
+# Page (Sheet) names to process
+PAGES = {
+    "Occupancy": "occupancy",
+    "Table Games": "table_games",
+    "Video Games": "video_games",
+    "Board & Card Games": "board_games"
+}
+
+
+def get_current_semester():
+    """
+    Determine the current semester based on the month.
+    - Spring: January to May -> spYY
+    - Summer: June to August -> suYY
+    - Fall: September to December -> fYY
+    """
+    month = datetime.now().month
+    year = str(datetime.now().year)[-2:]  # Extract last two digits of the year
+
+    if month in [1, 2, 3, 4, 5]:
+        return f"s{year}"  # Spring
+    else:
+        return f"f{year}"  # Fall
 
 
 def main():
@@ -27,24 +53,39 @@ def main():
             token.write(credentials.to_json())
 
     try:
-        service = build("sheets", "v4", credentials=credentials)   # creating the service to interact with Google Sheets
+        # Build the Google Sheets service
+        service = build("sheets", "v4", credentials=credentials)
         sheets = service.spreadsheets()
 
-        results = sheets.values().get(spreadsheetId = SPREADSHEET_ID, range="Sheet1!A1:C6").execute()
+        # Get current semester abbreviation (e.g., f23)
+        semester = get_current_semester()
 
-        values = results.get("values", [])
+        # Ensure the 'raw_data' folder exists
+        raw_data_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "raw_data")
+        if not os.path.exists(raw_data_folder):
+            os.makedirs(raw_data_folder)
 
-        for row in values:
-            print(row)
+        # Process each page (sheet) and export to its own CSV
+        for page_name, clean_name in PAGES.items():
+            print(f"Processing page: {page_name}")
 
-        if not values:
-            print("No data found.")
-            return
+            # Fetch all data in the specified sheet
+            results = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=page_name).execute()
+            values = results.get("values", [])
 
-        with open("data.csv", "w", newline="") as file:
-            writer = csv.writer(file)
-            writer.writerows(values)
-        print("Data exported to output.csv")    
+            if not values:
+                print(f"No data found in '{page_name}'.")
+                continue
+
+            # Generate a CSV file name and set its path inside 'raw_data' folder
+            output_file = os.path.join(raw_data_folder, f"{semester}_{clean_name}_raw.csv")
+
+            # Write data to the CSV file
+            with open(output_file, "w", newline="") as file:
+                writer = csv.writer(file)
+                writer.writerows(values)
+
+            print(f"Data exported to {output_file}")  
     except HttpError as e:
         print(e)
 
