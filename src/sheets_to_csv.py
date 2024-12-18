@@ -70,7 +70,7 @@ def main():
             print(f"Processing page: {page_name}")
 
             # Fetch all data in the specified sheet
-            results = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=page_name).execute()
+            results = sheets.values().get(spreadsheetId=SPREADSHEET_ID, range=page_name).execute() 
             values = results.get("values", [])
 
             if not values:
