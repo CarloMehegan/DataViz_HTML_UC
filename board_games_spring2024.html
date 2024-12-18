@@ -63,107 +63,25 @@
             <!-- second column here -->
             <h1>Board Game Data</h1>
             <p>
-                There were 112 recorded table game rentals between August 25, 2023, and December 17, 2023. Our analysis covers <b>105</b> sanitized entries. The other entries were missing information and were removed during the data cleansing process. Below is an excerpt of the data, with names and student IDs replaced with anonymous, unique IDs. There were <b>64</b> unique table game renters.
+                <!-- There were 112 recorded table game rentals between August 25, 2023, and December 17, 2023. Our analysis covers <b>105</b> sanitized entries. The other entries were missing information and were removed during the data cleansing process. Below is an excerpt of the data, with names and student IDs replaced with anonymous, unique IDs. There were <b>64</b> unique table game renters. -->
             </p>
 
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Unique ID</th>
-                    <th>Game</th>
-                    <th>Time In</th>
-                    <th>Time Out</th>
-                    <th>Duration (minutes)</th>
-                </tr>
-                <tr>
-                    <td>9/3</td>
-                    <td>26</td>
-                    <td>Taboo</td>
-                    <td>15:34</td>
-                    <td>16:03</td>
-                    <td>29</td>
-                </tr>
-                <tr>
-                    <td>9/3</td>
-                    <td>27</td>
-                    <td>Chess</td>
-                    <td>21:28</td>
-                    <td>21:57</td>
-                    <td>29</td>
-                </tr>
-                <tr>
-                    <td>9/5</td>
-                    <td>28</td>
-                    <td>Chess</td>
-                    <td>12:45</td>
-                    <td>13:36</td>
-                    <td>51</td>
-                </tr>
-                <tr>
-                    <td>9/7</td>
-                    <td>25</td>
-                    <td>Ticket to Ride</td>
-                    <td>19:00</td>
-                    <td>19:57</td>
-                    <td>57</td>
-                </tr>
-                <tr>
-                    <td>9/8</td>
-                    <td>25</td>
-                    <td>Catan</td>
-                    <td>15:04</td>
-                    <td>15:28</td>
-                    <td>24</td>
-                </tr>
-                <tr>
-                    <td>9/8</td>
-                    <td>29</td>
-                    <td>Jenga</td>
-                    <td>18:12</td>
-                    <td>18:30</td>
-                    <td>18</td>
-                </tr>
-                <tr>
-                    <td>9/8</td>
-                    <td>30</td>
-                    <td>Uno</td>
-                    <td>18:25</td>
-                    <td>19:07</td>
-                    <td>42</td>
-                </tr>
-                <tr>
-                    <td>9/8</td>
-                    <td>31</td>
-                    <td>Sorry</td>
-                    <td>19:08</td>
-                    <td>19:17</td>
-                    <td>9</td>
-                </tr>
-                <tr>
-                    <td>9/8</td>
-                    <td>32</td>
-                    <td>Deck of Cards</td>
-                    <td>20:02</td>
-                    <td>20:37</td>
-                    <td>35</td>
-                </tr>
-            </table>
 
 
             <p>
-                Board games historically have the least amount of rentals of the services offered at Union Central. This is evident in this dataset as well. Board games have barely more rentals than Shuffleboard, the lowest performing table game.
+                Board games historically have the least amount of rentals of the services offered at Union Central. The visualizations below pertain to board game rental data from SPring 2024.
             </p>
 
             <iframe src="resources/img/board_game_duration_distribution.html" height="420" width="620"></iframe>
 
             <p>
-                The histogram above shows the distribution of board game rental durations. Board game rentals average around 40 minutes, similar to pool table rentals. We were surprised that there were barely any sessions over an hour, since board games typically take a long time to play. We believe this is because most of the board games we have cater to shorter play sessions.
+                The histogram above shows the distribution of board game rental durations. 
             </p>
 
             <iframe src="resources/img/board_game_frequency_vs_avr_duration.html" height="520" width="650"></iframe>
 
             <p>
-                This scatterplot shows the average rental duration against the number of rentals for every game rented during the semester. The mouse-hover feature is especially useful for parsing this plot. At the bottom are games that were only rented once or twice. As we move up the figure, the log scale helps us group these games into popularity tiers. Chess stands out as the most popular board game. It is also interesting that Chess and the other popular board games have an average rental duration of around 40 minutes, once again paralleling the length of pool table rentals. Games with significantly longer or shorter average durations fall to the wayside with less rentals. Perhaps 40 minutes is the perfect length of time to spend at Union Central.
+                This scatterplot shows the average rental duration against the number of rentals for every game rented during the semester. The mouse-hover feature is especially useful for parsing this plot. At the bottom are games that were only rented once or twice. As we move up the figure, the log scale helps us group these games into popularity tiers.
             </p>
 
 
