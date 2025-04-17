@@ -1,4 +1,5 @@
 import csv
+from datetime import datetime
 
 #This file contains clean_games, which cleans the data for the
 #video game, table game, and board game spreadsheets.
@@ -83,6 +84,7 @@ def clean_occupancy(raw_filepath,bad_filepath,clean_filepath):
 def clean_games(raw_filepath,
                 bad_filepath,
                 clean_filepath,
+                year,
                 type,
                 num_columns = -1,
                ):
@@ -124,7 +126,8 @@ def clean_games(raw_filepath,
         data = fill_game_column(data)
 
     data = remove_empty_columns(data, num_columns)
-    data = fill_date_column(data)
+    # data = fill_date_column(data)
+    data = fill_and_standardize_date_column(data, year)
     data = remove_bad_rows(data, bad_filepath)
     data = anonymize_rows(data)
 
@@ -211,6 +214,59 @@ def fill_date_column(data: list[list[str]]) -> list[list[str]]:
             current_date = row[0].strip()  # Update the current date
         else:
             row[0] = current_date  # Fill missing date with the current date
+        filled_rows.append(row)
+
+    return [header] + filled_rows
+
+def fill_and_standardize_date_column(data: list[list[str]], year: int) -> list[list[str]]:
+    """
+    Fills down missing values in the first column (Date) and standardizes all dates
+    to 'YYYY-MM-DD' format using the provided year if not specified in the data.
+    
+    Parameters:
+    - data: 2D list representing CSV rows.
+    - year: Year to assume if it's missing in the date field.
+
+    This one is a chatgpt modified version of fill_date_column to fix date format issues
+
+    Accepts multiple formats like '8/24', '8/24/24', '8/24/2024'.
+    """
+    header = data[0]
+    rows = data[1:]
+
+    date_formats = [
+        "%m/%d/%Y",       # ex: 8/24/2024
+        "%m/%d/%y",       # ex: 8/24/24
+        "%m/%d",          # ex: 8/24 — assume the given year
+    ]
+
+    current_date_str = None
+    filled_rows = []
+
+    for row in rows:
+        raw_date = row[0].strip()
+
+        if raw_date:
+            parsed = None
+            for fmt in date_formats:
+                try:
+                    if fmt == "%m/%d":
+                        parsed = datetime.strptime(f"{raw_date}/{year}", "%m/%d/%Y")
+                    else:
+                        parsed = datetime.strptime(raw_date, fmt)
+                    break
+                except ValueError:
+                    continue
+            if parsed is None:
+                raise ValueError(f"Unrecognized date format: '{raw_date}'")
+            current_date_str = parsed.strftime("%Y-%m-%d")
+        elif current_date_str:
+            # fill down
+            pass
+        else:
+            raise ValueError("Missing date and nothing to fill down from.")
+
+        row[0] = current_date_str
         filled_rows.append(row)
 
     return [header] + filled_rows
