@@ -258,6 +258,12 @@ def fill_and_standardize_date_column(data: list[list[str]], year: int, column: i
                         parsed = datetime.strptime(f"{raw_date}/{year}", "%m/%d/%Y")
                     else:
                         parsed = datetime.strptime(raw_date, fmt)
+                    
+                    #🩹 Fix bad year entries like 2013 or 2014 → 2023 or 2024
+                    if parsed.year in {2013, 2014, 2015, 2016}:
+                        corrected_year = (year // 10) * 10 + (parsed.year % 10)
+                        parsed = parsed.replace(year=corrected_year)
+                        
                     break
                 except ValueError:
                     continue
