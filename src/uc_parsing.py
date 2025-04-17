@@ -258,7 +258,11 @@ def fill_and_standardize_date_column(data: list[list[str]], year: int) -> list[l
                 except ValueError:
                     continue
             if parsed is None:
-                raise ValueError(f"Unrecognized date format: '{raw_date}'")
+                # raise ValueError(f"Unrecognized date format: '{raw_date}'")
+                print(f"Unrecognized date format: '{raw_date}', skipping row.")
+                #dont want to raise an error, it will be removed in the next step anyways
+                #remove_bad_rows runs after this function does
+                continue
             current_date_str = parsed.strftime("%Y-%m-%d")
         elif current_date_str:
             # fill down
