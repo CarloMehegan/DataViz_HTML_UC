@@ -39,6 +39,7 @@ Steps for cleaning table games
 Steps for cleaning occupancy
 - Remove any entries that have missing values
 - Fix AM/PM time disparity
+- Standardize date formats
 '''
 
 #helper functions for reading and writing to csv
@@ -51,7 +52,7 @@ def save_csv(data, file_path):
         writer = csv.writer(outfile)
         writer.writerows(data)
 
-def clean_occupancy(raw_filepath,bad_filepath,clean_filepath):
+def clean_occupancy(raw_filepath,bad_filepath,clean_filepath,year):
     """
     A simpler version of the clean_games function below
 
@@ -71,6 +72,8 @@ def clean_occupancy(raw_filepath,bad_filepath,clean_filepath):
         data = convert_am_pm_times_to_military(data)
     else:
         data = fix_time_disparity_occupancy(data)
+    
+    data = fill_and_standardize_date_column(data, year, column=1) #occupancy is always 2024
 
     print("Parsing complete! First 5 rows:")
     for i in range(5):
@@ -218,7 +221,7 @@ def fill_date_column(data: list[list[str]]) -> list[list[str]]:
 
     return [header] + filled_rows
 
-def fill_and_standardize_date_column(data: list[list[str]], year: int) -> list[list[str]]:
+def fill_and_standardize_date_column(data: list[list[str]], year: int, column: int = 0) -> list[list[str]]:
     """
     Fills down missing values in the first column (Date) and standardizes all dates
     to 'YYYY-MM-DD' format using the provided year if not specified in the data.
@@ -226,6 +229,7 @@ def fill_and_standardize_date_column(data: list[list[str]], year: int) -> list[l
     Parameters:
     - data: 2D list representing CSV rows.
     - year: Year to assume if it's missing in the date field.
+    - column: Which column is the date column. By default, the first column (index 0).
 
     This one is a chatgpt modified version of fill_date_column to fix date format issues
 
@@ -244,7 +248,7 @@ def fill_and_standardize_date_column(data: list[list[str]], year: int) -> list[l
     filled_rows = []
 
     for row in rows:
-        raw_date = row[0].strip()
+        raw_date = row[column].strip()
 
         if raw_date:
             parsed = None
@@ -270,7 +274,7 @@ def fill_and_standardize_date_column(data: list[list[str]], year: int) -> list[l
         else:
             raise ValueError("Missing date and nothing to fill down from.")
 
-        row[0] = current_date_str
+        row[column] = current_date_str
         filled_rows.append(row)
 
     return [header] + filled_rows
