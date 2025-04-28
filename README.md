@@ -4,6 +4,8 @@ View the site live here: [https://carlomehegan.github.io/DataViz_HTML_UC/](https
 
 Contributors: Carlo Mehegan, David Cho, Violet Shi, Andrew Choi
 
+**Update**: Find a work-in-progress, cleaner version here [https://carlomehegan.github.io/uc-observable/](https://carlomehegan.github.io/uc-observable/). This site is not yet finished and does not have all of the data and visualizations available on the old version yet as of April 27 2025.
+
 ## 🎯 Project goals
 
 One of our group members works at Union Central, the games room in Sadler. During shifts, employees log occupancy and rentals. In a previous project for DATA303: Data Visualization, the UC Fall 2023 rental data was cleansed and analyzed, with the results and visualizations hosted on a static Github Pages site ([https://carlomehegan.github.io/DataViz_HTML_UC/](https://carlomehegan.github.io/DataViz_HTML_UC/)).
